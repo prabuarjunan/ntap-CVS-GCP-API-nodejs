@@ -15,7 +15,7 @@ app.get("/", (req, res, next)=>{
 	let options = {
 		mode: 'text',
 		pythonOptions: ['-u'], // get print results in real-time
-		scriptPath: '/Users/arjunan/PycharmProjects/ntap-CVS-GCP-API/', //If you are having get_token.py script in same folder, then it's optional.
+		scriptPath: '/Users/arjunan/PycharmProjects/ntap-CVS-GCP-API', //If you are having get_token.py script in same folder, then it's optional.
     args: ['id_token1'] //An argument which can be accessed in the script using sys.argv[1]
   };
   
