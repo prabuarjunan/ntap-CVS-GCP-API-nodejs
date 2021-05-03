@@ -4,6 +4,11 @@ const express=require('express');
 const app=express();
 const request = require('request');
 const str = require('str');
+var server = "https://cloudvolumesgcp-api.netapp.com"
+const project_number = 779740114201
+const location = "us-central1"
+var baseURL = server + "/v2/projects/"
+
 
 
 //Import PythonShell module.
@@ -41,7 +46,8 @@ function getServicelevel(token){
   //console.log (token)
   var options = {
     'method': 'GET',
-    'url': 'https://cloudvolumesgcp-api.netapp.com/v2/projects/779740114201/locations/us-central1/Storage/ServiceLevels',
+    //'url': 'https://cloudvolumesgcp-api.netapp.com/v2/projects/779740114201/locations/us-central1/Storage/ServiceLevels',
+    'url': String(baseURL) + String(project_number) + "/locations/" + location + "/Storage/ServiceLevels",
     'headers': {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token

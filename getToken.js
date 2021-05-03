@@ -15,7 +15,7 @@ app.get("/", (req, res, next)=>{
 		mode: 'text',
 		pythonOptions: ['-u'], // get print results in real-time
 		scriptPath: '/Users/arjunan/PycharmProjects/ntap-CVS-GCP-API', //If you are having get_token.py script in same folder, then it's optional.
-    args: ['id_token1'] //An argument which can be accessed in the script using sys.argv[1]
+		args: ['id_token1'] //An argument which can be accessed in the script using sys.argv[1]
   };
   
 	PythonShell.run('get_token.py', options, function (err, result){
@@ -26,12 +26,13 @@ app.get("/", (req, res, next)=>{
     //res.send(result.toString())
     //token = result.toString("utf8");
     var str = result.toString('utf8');
-    var token = str.substring(9, str.length - 1);
+    token = str.substring(9, str.length - 1);
     console.log (token)
-    getFilesystems(token)
 	});
 });
 
 //Creates the server on default port 8000 and can be accessed through localhost:8000
 const port=8000;
 app.listen(port, ()=>console.log(`Server connected to ${port}`));
+
+

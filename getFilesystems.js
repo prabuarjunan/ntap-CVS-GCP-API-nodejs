@@ -1,10 +1,12 @@
-
 //Import express.js module and create its variable.
 const express=require('express');
 const app=express();
 const request = require('request');
-const str = require('str');
-
+var server = "https://cloudvolumesgcp-api.netapp.com"
+//const service_account_file = '/Users/arjunan/Downloads/ncv-beta-demo-eccee8711557.json'
+const project_number = 779740114201
+const location = "us-central1"
+var baseURL = server + "/v2/projects/"
 
 //Import PythonShell module.
 const {PythonShell} =require('python-shell');
@@ -28,20 +30,24 @@ app.get("/", (req, res, next)=>{
     //token = result.toString("utf8");
     var str = result.toString('utf8');
     var token = str.substring(9, str.length - 1);
-    console.log (token)
+    //console.log (token)
     getFilesystems(token)
 	});
 });
 
 //Creates the server on default port 8000 and can be accessed through localhost:8000
-const port=8000;
-app.listen(port, ()=>console.log(`Server connected to ${port}`));
+const PORT=8000;
+
+//const HOST = 'localhost';
+
+//app.listen(PORT, HOST, ()=>console.log(`Server connected to http://${HOST}:${PORT}`));
+app.listen(PORT, ()=>console.log(`Server connected to ${PORT}`));
 
 function getFilesystems(token){
   //console.log (token)
   var options = {
     'method': 'GET',
-    'url': 'https://cloudvolumesgcp-api.netapp.com/v2/projects/779740114201/locations/us-central1/Volumes',
+    'url': String(baseURL) + String(project_number) + "/locations/" + location + "/Volumes",
     'headers': {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
@@ -51,5 +57,4 @@ function getFilesystems(token){
     if (error) throw new Error(error);
     console.log(response.body);
   });
-  
 }
